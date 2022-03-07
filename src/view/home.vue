@@ -1,5 +1,5 @@
 <template>
-    <div class="main">
+    <div class="main" @click="play">
         <el-carousel direction="vertical" :autoplay="false" indicator-position="none" ref="year"
                      :initial-index="index">
             <el-carousel-item>
@@ -37,7 +37,7 @@
             </div>
         </div>
         <div class="music">
-            <audio loop="loop" autoplay="autoplay">
+            <audio loop="loop" autoplay="autoplay" controls="controls" style="height: 1px" id="music-bg">
                 <source src="../assets/music/girl.mp3" type="audio/mpeg">
             </audio>
         </div>
@@ -51,6 +51,13 @@
         components: {
             commonContainer
         },
+        mounted() {
+            let audio = document.getElementById("music-bg");
+            audio.play();
+            setTimeout(()=>{
+                audio.play()
+            },200)
+        },
         data() {
             return {
                 index: 0,
@@ -58,7 +65,13 @@
         },
         methods: {
             handleClick() {
-                this.$refs.year.next()
+                this.$refs.year.next();
+                let audio = document.getElementById("music-bg");
+                audio.play();
+            },
+            play(){
+                let audio = document.getElementById("music-bg");
+                audio.play();
             }
         }
     }
@@ -69,6 +82,6 @@
         position: absolute;
         top: 0;
         right: 0;
-        opacity: 0;
+        opacity: 0.1;
     }
 </style>
